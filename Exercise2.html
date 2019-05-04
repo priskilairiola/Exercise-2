@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <body>
+            <h1>HTML Calculator</h1>
+            <div id ="calc-parent">
+               <div class="row">
+                   <div class ="column" id ="cal-display-val">0</div>
+               </div>
+            <div class="row">
+            <div class="calc-btn column" id="calc-clear">AC</div>    
+            <div class="calc-btn column" id="calc-backspace">&#8676;</div>    
+            <div class="calc-btn calc-btn-operator column" id="calc-divide">&#247;</div>
+            </div>
+            <div class="row">
+              <div class="calc-btn calc-btn-num column"id="calc-seven">7</div>
+              <div class="calc-btn calc-btn-num column"id="calc-eight">8</div>  
+              <div class="calc-btn calc-btn-num column"id="calc-nine">9</div>  
+              <div class="calc-btn calc-btn-operator column" id="calc-multiply">x</div>      
+            </div>
+            <div class="row">
+                <div class="calc-btn calc-btn-num column"id="calc-four">4</div>  
+                <div class="calc-btn calc-btn-num column"id="calc-five">5</div>  
+                <div class="calc-btn calc-btn-num column"id="calc-six">6</div>   
+                <div class="calc-btn calc-btn-operator column" id="calc-minus">-</div>     
+            </div>
+            <div class ="row">
+                <div class ="calc-btn calc-btn-num column"id="calc-one">1</div>  
+                <div class ="calc-btn calc-btn-num column"id="calc-two">2</div>  
+                <div class ="calc-btn calc-btn-num column"id="calc-three">3</div> 
+                <div class ="calc-btn calc-btn-operator column" id="calc-plus">+</div>      
+            </div>
+            <div class="row">
+                <div class ="calc-btn calc-btn-num column"id="calc-zero">0</div> 
+                <div class ="calc-btn column"id="calc-decimal">.</div> 
+                <div class ="calc-btn calc-btn-operator column" id="calc-equals">=</div>   
+            </div>
+        </div>
+        <script>
+           
+          
+           var oneBtn = document.getElementById('calc-one'); 
+           var twoBtn = document.getElementById('calc-two'); 
+           var threeBtn = document.getElementById('calc-three'); 
+           var fourBtn = document.getElementById('calc-four'); 
+           var fiveBtn = document.getElementById('calc-five'); 
+           var sixBtn = document.getElementById('calc-six'); 
+           var sevenBtn = document.getElementById('calc-seven'); 
+           var eightBtn = document.getElementById('calc-eight'); 
+           var nineBtn = document.getElementById('calc-nine'); 
+           var zeroBtn = document.getElementById('calc-zero'); 
+           
+           var decimalBtn = document.getElementById('calc-decimal');
+           var clearBtn = document.getElementById('calc-clear');
+           var backspaceBtn = document.getElementById('calc-backspace');
+           var displayvalElement = document.getElementById('cal-display-val');
+
+           var displayVal = '0';
+           var pendingVal; 
+           var evalStringArray = [];
+
+           var calcNumBtns = document.getElementsByClassName('calc-btn-num');
+           var calcOperatorBtns = document.getElementsByClassName('calc-btn-operator');
+
+           var updatedisplayVal = (clickObj) => {
+               var btnText = clickObj.target.innerText;
+
+               if (displayVal === '0')
+                  displayVal = '';
+
+               displayVal += btnText;
+               displayvalElement.innerText = displayVal;
+          }
+          
+          var performance = (clickObj) => {
+              var operator = clickObj.target.innerText;
+
+          }
+           for (let i = 0; i < calcNumBtns.length; i++) {
+               calcNumBtns[i].addEventListener('click', updatedisplayVal, false);
+           }
+           for (let i = 0; i < calcOperatorBtns.length; i++) {
+               calcOperatorBtns[i].addEventListener('click', performance, false);
+           }
+
+
+           clearBtn.onclick = () => {
+               displayVal = '0';
+               pendingVal = undefined;
+               evalStringArray = [];
+               displayvalElement.innerHTML = displayVal;
+               displayVal = dispalyVal.slice(0, lengthofDisplayVal - 1);
+
+              if(displayVal === '')
+                 displayVal = '0'; 
+
+               displayvalElement.innerText = displayVal;
+
+           }
+           decimalBtn.onclick = () => {
+               if (!displayVal.includes('.'))
+               displayVal += '.';
+               displayvalElement.innerText = displayVal;
+           }
+           backspaceBtn.onclick = () => {
+               let lengthofDisplayVal = displayVal.length;
+
+           }
+               switch(Operator) {
+                case '+':
+                       pendingVal = displayVal;
+                       displayVal = '0';
+                       displayvalElement.innerText = displayVal;
+                       evalStringArray.push(pendingVal);
+                       evalStringArray.push('+');
+                       break;
+
+                case '-':
+                       pendingVal = displayVal;
+                       displayVal = '0';
+                       displayvalElement.innerText = displayVal;
+                       evalStringArray.push(pendingVal);
+                       evalStringArray.push('-');
+                   break;
+
+                case 'x': 
+                       pendingVal = displayVal;
+                       displayVal = '0';
+                       displayvalElement.innerText = displayVal;
+                       evalStringArray.push(pendingVal);
+                       evalStringArray.push('*');
+                       break;
+                case'+':
+                       pendingVal = displayVal;
+                       displayVal = '0';
+                       displayvalElement.innerText = displayVal;
+                       evalStringArray.push(pendingVal);
+                       evalStringArray.push('/');
+                       break;
+                case '=':
+                    evalStringArray.push(displayval);
+                    var evaluation = eval(evalStringArray.join(''));
+                    displayval = evaluation + '';
+                    displayvalElement.innerText = displayval;
+                    evalStringArray = [];
+                    break;
+                  default:
+                       break;
+               }
+        </script>
+        </body>
+    </head>
+</html>
